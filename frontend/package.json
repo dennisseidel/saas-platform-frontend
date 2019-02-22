@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "antd": "^3.13.2",
+    "aws-amplify": "^1.1.19",
+    "aws-amplify-react": "^2.3.0",
     "babel-plugin-import": "^1.11.0",
     "customize-cra": "^0.2.11",
     "enquire-js": "^0.2.1",
