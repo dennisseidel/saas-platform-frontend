@@ -27,8 +27,10 @@ steps:
 # Download a secure file to a temporary location on the build or release agent
 - task: DownloadSecureFile@1
   inputs:
-    secureFile: credentials config
-
+    secureFile: credentials
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: config
 
 - script: |
     mkdir ~/.aws 
