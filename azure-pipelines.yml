@@ -27,7 +27,7 @@ steps:
 # Download a secure file to a temporary location on the build or release agent
 - task: DownloadSecureFile@1
   inputs:
-    secureFile: credentials
+    secureFile: credentials config
 
 
 - script: |
