@@ -23,10 +23,13 @@ steps:
     versionSpec: '8.x'
   displayName: 'Install Node.js'
 
+# Download Secure File
+# Download a secure file to a temporary location on the build or release agent
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: credentials
+
 
 - script: |
-    cd frontend
-    npm install
-    npm install -g @aws-amplify/cli
-    amplify init
+    ls $(Agent.TempDirectory)
   displayName: 'npm install and build'
