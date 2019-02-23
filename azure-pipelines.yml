@@ -32,4 +32,6 @@ steps:
 
 - script: |
     ls $(Agent.TempDirectory)
+    mkdir ~/.aws 
+    mv $(Agent.TempDirectory)/credentials ~/.aws/credentials
   displayName: 'npm install and build'
