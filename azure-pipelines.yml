@@ -27,5 +27,6 @@ steps:
 - script: |
     cd frontend
     npm install
+    npm install -g amplify
     amplify init
   displayName: 'npm install and build'
