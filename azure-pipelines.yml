@@ -27,6 +27,6 @@ steps:
 - script: |
     cd frontend
     npm install
-    npm install -g amplify
+    npm install -g @aws-amplify/cli
     amplify init
   displayName: 'npm install and build'
