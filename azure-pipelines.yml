@@ -52,3 +52,4 @@ steps:
 
 - script: |
   # setup preview environment & artifact bucket & upload to artifiact bucket
+  displayName: 'Setup Infrastucture & Deploy to preview environment'
