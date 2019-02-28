@@ -13,6 +13,7 @@ pr:
     exclude:
     - README.md
     - /adr/*
+    - .adr-dir
 
 pool:
   vmImage: 'Ubuntu-16.04'
@@ -37,4 +38,8 @@ steps:
     mv $(Agent.TempDirectory)/credentials ~/.aws/credentials
     mv $(Agent.TempDirectory)/config ~/.aws/config
     ls ~/.aws
-  displayName: 'npm install and build'
+  displayName: 'setup credentials'
+
+- script: |
+    npm install && npm run build
+  displayName: 'build'
