@@ -41,5 +41,6 @@ steps:
   displayName: 'setup credentials'
 
 - script: |
+    cd frontend
     npm install && npm run build
   displayName: 'build'
