@@ -44,3 +44,11 @@ steps:
     cd frontend
     npm install && npm run build
   displayName: 'build'
+
+- script: |
+    #cypress
+    #run test
+  displayName: 'run test'
+
+- script: |
+  # setup preview environment & artifact bucket & upload to artifiact bucket
