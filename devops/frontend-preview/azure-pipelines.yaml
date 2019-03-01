@@ -1,0 +1,61 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+pr:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - /frontend
+    exclude:
+    - README.md
+    - /adr/*
+    - .adr-dir
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '8.x'
+  displayName: 'Install Node.js'
+
+# Download Secure File
+# Download a secure file to a temporary location on the build or release agent
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: credentials
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: config
+
+- script: |
+    mkdir ~/.aws 
+    mv $(Agent.TempDirectory)/credentials ~/.aws/credentials
+    mv $(Agent.TempDirectory)/config ~/.aws/config
+    ls ~/.aws
+    curl -fsSL https://get.pulumi.com | sh
+    export PATH=$PATH:$HOME/.pulumi/bin
+  displayName: 'setup credentials & dependencies'
+
+- script: |
+    cd frontend
+    npm install && npm run build
+  displayName: 'build'
+
+- script: |
+    #cypress
+    #run test
+  displayName: 'run test'
+
+- script: |
+  # setup preview environment & artifact bucket & upload to artifiact bucket
+  cd devops
+  npm install
+  npm run build
+  pulumi preview
+  displayName: 'Setup Infrastucture & Deploy to preview environment'

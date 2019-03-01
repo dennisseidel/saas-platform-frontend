@@ -1,30 +1,6 @@
-# Project Boilerplate
-
-This project contains a template to use when creating a new project. It comes with all the standard files which there is expected to be in an open source project on Github. 
-
-## How to use
-
-1. Clone this project and copy the files into your own project
-2. Update files in `.github`, `CONTRIBUTING.md`, `CONTRIBUTORS.md`, `LICENSE`, `MAINTAINERS`, `SECURITY.md`, `README.md`
-3. Start developing!
-
-## Readme template
-
-Below you can find a complete readme template for a project (based on [work](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2) by [@PurpleBooth](https://github.com/PurpleBooth)), this will help you communicate the vision and goals of the project as well as answering common questions from future contributors.
-
-The readme file is the single most important documentation of your project, so make sure you spend time on giving a great first impression to new users and provide the needed information to interested contributors.
-
-
----- 
-
-```
-Readme.md template below, when setup is complete, delete all content above this.
-```
-
-
 # saas-platform-template
 
-_description_
+_This project allows you to bootstrap saas architectures within minutes - meaning you will have your saas platform template running and can adapt form there while seeing how [best practices](https://www.youtube.com/watch?v=O3L-dSyqA7g) can be implemented._
 
 Describe what this project does. Keep this language human and friendly, so avoid internal references, acronyms and if you 
 have dependencies, provide a direct link to these.
