@@ -34,10 +34,6 @@ steps:
     secureFile: config
 
 - script: |
-    mkdir ~/.aws 
-    mv $(Agent.TempDirectory)/credentials ~/.aws/credentials
-    mv $(Agent.TempDirectory)/config ~/.aws/config
-    ls ~/.aws
     curl -fsSL https://get.pulumi.com | sh
   displayName: 'setup credentials & dependencies'
 
@@ -60,4 +56,6 @@ steps:
     pulumi preview
   env:
       PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
+      AWS_ACCESS_KEY_ID: $(aws.master.accesskey)
+      AWS_SECRET_ACCESS_KEY: $(aws.master.accesssecret)
   displayName: 'Setup Infrastucture & Deploy to preview environment'
