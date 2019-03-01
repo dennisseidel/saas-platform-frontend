@@ -24,16 +24,8 @@ steps:
     versionSpec: '8.x'
   displayName: 'Install Node.js'
 
-# Download Secure File
-# Download a secure file to a temporary location on the build or release agent
-- task: DownloadSecureFile@1
-  inputs:
-    secureFile: credentials
-- task: DownloadSecureFile@1
-  inputs:
-    secureFile: config
-
 - script: |
+    apt-get update && apt-get install -y libgconf-2-4
     curl -fsSL https://get.pulumi.com | sh
   displayName: 'setup credentials & dependencies'
 
@@ -43,8 +35,8 @@ steps:
   displayName: 'build'
 
 - script: |
-    #cypress
-    #run test
+    cd frontend
+    npm run e2e
   displayName: 'run test'
 
 - script: |
