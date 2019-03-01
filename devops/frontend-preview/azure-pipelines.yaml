@@ -36,8 +36,7 @@ steps:
 
 - script: |
     cd frontend
-    npm run e2e-start
-    npm run e2e-run
+    npm run e2e
   displayName: 'run test'
 
 - script: |
