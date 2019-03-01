@@ -26,7 +26,7 @@
     "cy:open": "cypress open",
     "cy:verify": "cypress verify",
     "cy:run": "cypress run",
-    "e2e-start": "serve -s build  -l 3000 -nn",
+    "e2e-start": "serve -s build  -l 3000 -n",
     "e2e-run": "wait-on http://localhost:3000 && npm run cy:run"
   },
   "eslintConfig": {
