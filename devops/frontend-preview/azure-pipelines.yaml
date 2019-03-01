@@ -53,7 +53,7 @@ steps:
     cd devops/frontend-preview
     npm install
     pulumi stack select denseidel/saas-template-frontend/dev
-    pulumi preview
+    pulumi up -y
   env:
       PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
       AWS_ACCESS_KEY_ID: $(aws.master.accesskey)
