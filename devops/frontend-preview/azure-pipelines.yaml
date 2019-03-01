@@ -56,7 +56,7 @@ steps:
     export PATH=$PATH:$HOME/.pulumi/bin
     cd devops/frontend-preview
     npm install
-    pulumi stack select denseidel/saas-template-frontend
+    pulumi stack select denseidel/saas-template-frontend/dev
     pulumi preview
   env:
       PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
