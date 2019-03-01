@@ -54,7 +54,9 @@ steps:
 
 - script: |
     # setup preview environment & artifact bucket & upload to artifiact bucket
+    ls
     cd devops
+    ls
     npm install
     npm run build
     pulumi preview
