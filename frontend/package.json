@@ -26,7 +26,7 @@
     "cy:open": "cypress open",
     "cy:verify": "cypress verify",
     "cy:run": "cypress run",
-    "e2e": "serve -s build  -l 3000 -n & wait-on http://localhost:3000 && npm run cy:run",
+    "e2e": "serve -s build  -l 3000 -n & wait-on http://localhost:3000 && npm run cy:run"
   },
   "eslintConfig": {
     "extends": "react-app"
