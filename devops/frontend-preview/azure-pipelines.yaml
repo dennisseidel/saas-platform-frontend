@@ -53,9 +53,9 @@ steps:
   displayName: 'run test'
 
 - script: |
-  # setup preview environment & artifact bucket & upload to artifiact bucket
-  cd devops
-  npm install
-  npm run build
-  pulumi preview
+    # setup preview environment & artifact bucket & upload to artifiact bucket
+    cd devops
+    npm install
+    npm run build
+    pulumi preview
   displayName: 'Setup Infrastucture & Deploy to preview environment'
