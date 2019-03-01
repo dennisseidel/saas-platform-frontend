@@ -56,6 +56,5 @@ steps:
     export PATH=$PATH:$HOME/.pulumi/bin
     cd devops/frontend-preview
     npm install
-    npm run build
     pulumi preview
   displayName: 'Setup Infrastucture & Deploy to preview environment'
