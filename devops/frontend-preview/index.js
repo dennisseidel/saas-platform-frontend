@@ -8,6 +8,8 @@ const glob = require('glob');
 const zip = require('adm-zip');
 
 
+aws.config.region = "eu-central-1"
+
 let siteDir = "../../frontend/build"; // directory for content files
 let dirs = glob.sync(siteDir + '/**/*', { nodir: true });
 
@@ -18,14 +20,14 @@ let deployBucket = new aws.s3.Bucket("saas-platform-frontend-deployment", {
   },
 });
 
-var archieve = new zip();
-archieve.addLocalFolder(siteDir);
-archieve.writeZip('./frontend.zip');
+// var archieve = new zip();
+// archieve.addLocalFolder(siteDir);
+// archieve.writeZip('./frontend.zip');
 
-let deploymentObject = new aws.s3.BucketObject('frontend', {
-  bucket: deployBucket,
-  source: new pulumi.asset.FileAsset('./frontend.zip'),
-});
+// let deploymentObject = new aws.s3.BucketObject('frontend', {
+//   bucket: deployBucket,
+//   source: new pulumi.asset.FileAsset('./frontend.zip'),
+// });
 
 
 // Create an S3 bucket for platform frontend
@@ -72,5 +74,19 @@ let bucketPolicy = new aws.s3.BucketPolicy("bucketPolicy", {
           // transform the siteBucket.bucket output property -- see explanation below
 });
 
+
+// identity provider
+const userPool = new aws.cognito.UserPool("saas-template-users", {
+  autoVerifiedAttributes: ["email"],
+});
+
+const clientFrontend = new aws.cognito.UserPoolClient("client", {
+  userPoolId: userPool.id,
+});
+
+console.log(pulumi.Config.name);
+
 exports.websiteUrl = siteBucket.websiteEndpoint; // output the endpoint as a stack output
-exports.bucketName = siteBucket.bucket; // create a stack export for bucket name
+exports.userPoolWebClientId = clientFrontend.id;
+exports.userPoolId = userPool.id;
+exports.region = aws.config.region;

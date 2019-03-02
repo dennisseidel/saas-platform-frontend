@@ -30,8 +30,17 @@ steps:
   displayName: 'setup credentials & dependencies'
 
 - script: |
+    export PATH=$PATH:$HOME/.pulumi/bin
+    cd devops/frontend-preview
+    npm install
+    pulumi stack select denseidel/saas-template-frontend/dev
+    pulumi stack output -j > ../../frontend/src/config.json
     cd frontend
     npm install && npm run build
+  env:
+      PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
+      AWS_ACCESS_KEY_ID: $(aws.master.accesskey)
+      AWS_SECRET_ACCESS_KEY: $(aws.master.accesssecret)
   displayName: 'build'
 
 - script: |
@@ -43,7 +52,7 @@ steps:
     # setup preview environment & artifact bucket & upload to artifiact bucket
     export PATH=$PATH:$HOME/.pulumi/bin
     cd devops/frontend-preview
-    npm install
+    #npm install
     pulumi stack select denseidel/saas-template-frontend/dev
     pulumi up -y
   env:

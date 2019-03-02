@@ -9,6 +9,11 @@
             "UnauthRoleName": "health-saas-frontend-20190222160800-unauthRole",
             "StackName": "health-saas-frontend-20190222160800",
             "StackId": "arn:aws:cloudformation:eu-central-1:825465353745:stack/health-saas-frontend-20190222160800/a4f86960-36b3-11e9-a1da-0649507b8a60"
+        },
+        "categories": {
+            "auth": {
+                "cognitocf1a9f00": {}
+            }
         }
     }
 }
