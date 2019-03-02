@@ -35,7 +35,7 @@ steps:
     npm install
     pulumi stack select denseidel/saas-template-frontend/dev
     pulumi stack output -j > ../../frontend/src/config.json
-    cd frontend
+    cd ../../frontend
     npm install && npm run build
   env:
       PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
