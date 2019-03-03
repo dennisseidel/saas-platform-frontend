@@ -33,6 +33,7 @@ let deployBucket = new aws.s3.Bucket("saas-platform-frontend-deployment", {
 // Create an S3 bucket for platform frontend
 let siteBucket = new aws.s3.Bucket("saas-platform-frontend", {
   website: {
+    errorDocument: "index.html",
     indexDocument: "index.html",
   },
 });
