@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Amplify from 'aws-amplify';
+
 import Layout from './layouts/LandingpageLayout';
 import Header from './components/Header/Header';
+import ManagementHeader from './components/ManagementHeader/ManagementHeader'
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/index';
+import Management from './pages/Management/index';
 import './App.css';
 import config from './config.json';
-import Amplify from 'aws-amplify';
-import { withAuthenticator } from 'aws-amplify-react';
 
 Amplify.configure({
   Auth: {
@@ -56,13 +59,19 @@ Amplify.configure({
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Layout header={<Header/>} footer={<Footer/>}>
-          <Home />
-        </Layout>
-      </div>
+      <Router>
+        <div className="App">
+          <Route exact path="/" component={() => <Layout header={<Header/>} footer={<Footer/>}>
+              <Home />
+            </Layout>
+          } />
+          <Route path="/management" component={() => <Layout header={<ManagementHeader/>} footer={<Footer/>}>
+            <Management />
+        </Layout>} />
+        </div>
+      </Router>
     );
   }
 }
 
-export default withAuthenticator(App);
+export default App;

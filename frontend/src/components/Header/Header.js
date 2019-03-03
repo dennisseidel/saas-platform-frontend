@@ -23,7 +23,7 @@ const header = (props) => {
       <div style={{
         float: 'right'
       }}>
-        <Button type="primary">Login</Button>
+        <Button type="primary" href="/management">Login</Button>
       </div>
     </div>
   );
