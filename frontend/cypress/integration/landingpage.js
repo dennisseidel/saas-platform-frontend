@@ -13,9 +13,15 @@ describe('Open Landing Page', function() {
     cy.url().should('include', '/')
   })
 
-  it('login', function() {
+  it('login and management console contains services and tenant management', function() {
     cy.visit('/')
-    cy.contains('Login').click()
+    cy.contains('Login').click().get('input[name=username]').type('dennis').get('input[name=password').type('ABC123456!a')
+    cy.contains('Sign In').click()
+    cy.url().should('include', '/management')
+
+    cy.contains('Management Console')
+    cy.contains('tenant')
+    cy.contains('Services')
   })
 
   it('has learn more', function() {
