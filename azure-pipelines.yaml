@@ -21,19 +21,15 @@ steps:
   inputs:
     versionSpec: '8.x'
   displayName: 'Install Node.js'
-
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.6'
+    architecture: 'x64'
 - script: |
     echo 'everything should be there'
   displayName: 'setup credentials & dependencies'
-- task: PythonScript@0
-  inputs:
-    scriptSource: 'filePath' # Options: filePath, inline
-    scriptPath: './scripts/deploy-infrastructure.py'# Required when scriptSource == FilePath
-    #script: # Required when scriptSource == Inline
-    arguments: '-c infrastructure' # Optional
-    #pythonInterpreter: # Optional
-    workingDirectory: scripts
-    failOnStderr: true # Optional
+- script: |
+    cd ./scripts && ./deploy-infrastructure.py -c infrastructure
   env:
       # PULUMI_ACCESS_TOKEN: $(pulumi.access.token) How to handle terraform remote state?
       AWS_ACCESS_KEY_ID: $(aws.master.accesskey)
