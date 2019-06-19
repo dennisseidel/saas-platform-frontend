@@ -34,8 +34,8 @@ steps:
       # PULUMI_ACCESS_TOKEN: $(pulumi.access.token) How to handle terraform remote state?
       AWS_ACCESS_KEY_ID: $(aws.master.accesskey)
       AWS_SECRET_ACCESS_KEY: $(aws.master.accesssecret)
-      TF_VAR_AWS_ACCESS_KEY_ID: $(aws.master.accesskey)
-      TF_VAR_AWS_SECRET_ACCESS_KEY: $(aws.master.accesssecret)
+      TF_VAR_AWS_ACCESS_KEY: $(aws.master.accesskey)
+      TF_VAR_AWS_SECRET_KEY: $(aws.master.accesssecret)
   displayName: 'build'
 
 - script: |
