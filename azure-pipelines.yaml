@@ -30,16 +30,15 @@ steps:
   displayName: 'setup credentials & dependencies'
 - script: |
     cd ./scripts && python deploy-infrastructure.py -c infrastructure -ni True
-    cp ./infrastructure/config.json ./src/config.json
-    npm install && npm run build
-    cd ./scripts && ./deploy-infrastructure.py -c website
   env:
       # PULUMI_ACCESS_TOKEN: $(pulumi.access.token) How to handle terraform remote state?
       AWS_ACCESS_KEY_ID: $(aws.master.accesskey)
       AWS_SECRET_ACCESS_KEY: $(aws.master.accesssecret)
       TF_VAR_AWS_ACCESS_KEY: $(aws.master.accesskey)
       TF_VAR_AWS_SECRET_KEY: $(aws.master.accesssecret)
-  displayName: 'build'
+  displayName: 'setup infrastructure'
+- script: |
+    cp ./infrastructure/config.json ./src/config.json
 
 - script: |
     npm run e2e
@@ -47,9 +46,9 @@ steps:
 
 - script: |
     # setup preview environment & artifact bucket & upload to artifiact bucket
-    #npm install
+    npm install && npm run build
+    cd ./scripts && ./deploy-infrastructure.py -c website
   env:
-      PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
       AWS_ACCESS_KEY_ID: $(aws.master.accesskey)
       AWS_SECRET_ACCESS_KEY: $(aws.master.accesssecret)
-  displayName: 'Setup Infrastucture & Deploy to preview environment'
+  displayName: 'Deploy to preview environment'
