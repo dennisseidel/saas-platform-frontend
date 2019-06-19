@@ -29,7 +29,7 @@ steps:
     echo 'everything should be there'
   displayName: 'setup credentials & dependencies'
 - script: |
-    cd ./scripts && python deploy-infrastructure.py -c infrastructure -ni
+    cd ./scripts && python deploy-infrastructure.py -c infrastructure -ni True
   env:
       # PULUMI_ACCESS_TOKEN: $(pulumi.access.token) How to handle terraform remote state?
       AWS_ACCESS_KEY_ID: $(aws.master.accesskey)
