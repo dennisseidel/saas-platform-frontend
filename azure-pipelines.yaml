@@ -28,7 +28,7 @@ steps:
 - task: PythonScript@0
   inputs:
     scriptSource: 'filePath' # Options: filePath, inline
-    scriptPath: './deploy-infrastructure.py'# Required when scriptSource == FilePath
+    scriptPath: './scripts/deploy-infrastructure.py'# Required when scriptSource == FilePath
     #script: # Required when scriptSource == Inline
     arguments: '-c infrastructure' # Optional
     #pythonInterpreter: # Optional
