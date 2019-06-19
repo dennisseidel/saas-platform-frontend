@@ -8,8 +8,6 @@ pr:
     include:
     - master
   paths:
-    include:
-    - /frontend
     exclude:
     - README.md
     - /adr/*
@@ -25,36 +23,29 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    apt-get update && apt-get install -y libgconf-2-4
-    curl -fsSL https://get.pulumi.com | sh
+    echo 'everything should be there'
   displayName: 'setup credentials & dependencies'
 
 - script: |
-    export PATH=$PATH:$HOME/.pulumi/bin
-    cd devops/frontend-preview
-    npm install
-    pulumi stack select denseidel/saas-template-frontend/dev
-    pulumi stack output -j > ../../frontend/src/config.json
-    cd ../../frontend
+    cd ./scripts && ./deploy-infrastructure.py -c infrastructure
+    cp ./infrastructure/config.json ./src/config.json
     npm install && npm run build
+    cd ./scripts && ./deploy-infrastructure.py -c website
   env:
-      PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
+      # PULUMI_ACCESS_TOKEN: $(pulumi.access.token) How to handle terraform remote state?
       AWS_ACCESS_KEY_ID: $(aws.master.accesskey)
       AWS_SECRET_ACCESS_KEY: $(aws.master.accesssecret)
+      TF_VAR_AWS_ACCESS_KEY_ID: $(aws.master.accesskey)
+      TF_VAR_AWS_SECRET_ACCESS_KEY: $(aws.master.accesssecret)
   displayName: 'build'
 
 - script: |
-    cd frontend
     npm run e2e
   displayName: 'run test'
 
 - script: |
     # setup preview environment & artifact bucket & upload to artifiact bucket
-    export PATH=$PATH:$HOME/.pulumi/bin
-    cd devops/frontend-preview
     #npm install
-    pulumi stack select denseidel/saas-template-frontend/dev
-    pulumi up -y
   env:
       PULUMI_ACCESS_TOKEN: $(pulumi.access.token)
       AWS_ACCESS_KEY_ID: $(aws.master.accesskey)
