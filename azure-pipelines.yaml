@@ -25,11 +25,15 @@ steps:
 - script: |
     echo 'everything should be there'
   displayName: 'setup credentials & dependencies'
-
-- script: |
-    pwd
-    ls
-    cd scripts && ./deploy-infrastructure.py -c infrastructure
+- task: PythonScript@0
+  inputs:
+    scriptSource: 'filePath' # Options: filePath, inline
+    scriptPath: './deploy-infrastructure.py'# Required when scriptSource == FilePath
+    #script: # Required when scriptSource == Inline
+    arguments: '-c infrastructure' # Optional
+    #pythonInterpreter: # Optional
+    workingDirectory: scripts
+    failOnStderr: true # Optional
   env:
       # PULUMI_ACCESS_TOKEN: $(pulumi.access.token) How to handle terraform remote state?
       AWS_ACCESS_KEY_ID: $(aws.master.accesskey)
