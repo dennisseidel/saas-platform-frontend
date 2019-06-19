@@ -27,10 +27,9 @@ steps:
   displayName: 'setup credentials & dependencies'
 
 - script: |
-    cd ./scripts && ./deploy-infrastructure.py -c infrastructure
-    cp ./infrastructure/config.json ./src/config.json
-    npm install && npm run build
-    cd ./scripts && ./deploy-infrastructure.py -c website
+    pwd
+    ls
+    cd scripts && ./deploy-infrastructure.py -c infrastructure
   env:
       # PULUMI_ACCESS_TOKEN: $(pulumi.access.token) How to handle terraform remote state?
       AWS_ACCESS_KEY_ID: $(aws.master.accesskey)
