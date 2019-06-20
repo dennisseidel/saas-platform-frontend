@@ -8,7 +8,7 @@ terraform {
   backend "s3" {
     bucket = "saas-platform-terraform-state"
     key    = "frontend/terraform.tfstate"
-    region = "${var.AWS_REGION}"
+    region = "eu-central-1"
   }
 }
 
