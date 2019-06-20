@@ -31,8 +31,8 @@ steps:
 - script: |
     cd ./scripts && python deploy-infrastructure.py -c infrastructure -ni True
   env:
-      TF_VAR_AWS_ACCESS_KEY: $(aws.accesskey)
-      TF_VAR_AWS_SECRET_KEY: $(aws.accesssecret)
+      AWS_ACCESS_KEY_ID: $(aws.accesskey)
+      AWS_SECRET_ACCESS_KEY: $(aws.accesssecret)
   displayName: 'setup infrastructure'
 - script: |
     cp ./infrastructure/config.json ./src/config.json
