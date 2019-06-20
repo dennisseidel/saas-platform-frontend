@@ -4,9 +4,8 @@ provider "aws" {
   region     = "${var.AWS_REGION}"
 }
 
-data "terraform_remote_state" "network" {
-  backend = "s3"
-  config = {
+terraform {
+  backend "s3" {
     bucket = "saas-platform-terraform-state"
     key    = "frontend/terraform.tfstate"
     region = "${var.AWS_REGION}"
