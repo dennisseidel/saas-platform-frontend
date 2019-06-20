@@ -37,12 +37,13 @@ steps:
 - script: |
     cp ./infrastructure/config.json ./src/config.json
 - script: |
+    npm install && npm run build
+  displayName: 'install dependencies and build'
+- script: |
     npm run e2e
-  displayName: 'run test'
-
+  displayName: 'run e2e tests'
 - script: |
     # setup preview environment & artifact bucket & upload to artifiact bucket
-    npm install && npm run build
     cd ./scripts && ./deploy-infrastructure.py -c website
   env:
       AWS_ACCESS_KEY_ID: $(aws.accesskey)
