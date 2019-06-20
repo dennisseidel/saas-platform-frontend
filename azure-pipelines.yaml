@@ -32,9 +32,6 @@ steps:
     env
     cd ./scripts && python deploy-infrastructure.py -c infrastructure -ni True
   env:
-      # PULUMI_ACCESS_TOKEN: $(pulumi.access.token) How to handle terraform remote state?
-      AWS_ACCESS_KEY_ID: $(aws.accesskey)
-      AWS_SECRET_ACCESS_KEY: $(aws.accesssecret)
       TF_VAR_AWS_ACCESS_KEY: $(aws.accesskey)
       TF_VAR_AWS_SECRET_KEY: $(aws.accesssecret)
   displayName: 'setup infrastructure'
