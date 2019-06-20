@@ -4,6 +4,16 @@ provider "aws" {
   region     = "${var.AWS_REGION}"
 }
 
+data "terraform_remote_state" "network" {
+  backend = "s3"
+  config = {
+    bucket = "saas-platform-terraform-state"
+    key    = "frontend/terraform.tfstate"
+    region = "${var.AWS_REGION}"
+  }
+}
+
+
 resource "aws_s3_bucket" "saas-platform-frontend-deployment-artefacts" {
   bucket = "saas-platform-frontend-deployment-artefacts"
   acl    = "private"
