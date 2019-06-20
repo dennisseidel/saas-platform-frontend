@@ -29,7 +29,6 @@ steps:
     echo 'everything should be there'
   displayName: 'setup credentials & dependencies'
 - script: |
-    env
     cd ./scripts && python deploy-infrastructure.py -c infrastructure -ni True
   env:
       TF_VAR_AWS_ACCESS_KEY: $(aws.accesskey)
@@ -37,7 +36,6 @@ steps:
   displayName: 'setup infrastructure'
 - script: |
     cp ./infrastructure/config.json ./src/config.json
-
 - script: |
     npm run e2e
   displayName: 'run test'
