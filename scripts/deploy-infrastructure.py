@@ -35,7 +35,7 @@ if args.component == "infrastructure":
             TEST_USER = os.environ["TEST_USER"]
             TEST_USER_PW = os.environ["TEST_USER_PW"]
             # sign up user
-            client = boto3.client('cognito-idp')
+            client = boto3.client('cognito-idp', region_name=REGION)
             response = client.sign_up(
                 ClientId=CLIENT_ID,
                 Username=TEST_USER,
