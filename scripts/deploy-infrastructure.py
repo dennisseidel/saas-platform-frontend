@@ -4,6 +4,7 @@ import os
 # import boto3
 # import botocore
 import argparse
+import json
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -25,6 +26,20 @@ if args.component == "infrastructure":
         os.system(bash_command)
         bash_command = f'cd {path_to_infrastructure} && terraform output --json > config.json'
         os.system(bash_command)
+        # parse config
+        with open(f"{path_to_infrastructure}/config.json", "r") as read_file:
+            config = json.load(read_file)
+            REGION = config['region']['value']
+            CLIENT_ID = config['user_pool_web_client_id']['value']
+            USER_POOL_ID = config['user_pool_id']['value']
+            TEST_USER = os.environ["TEST_USER"]
+            TEST_USER_PW = os.environ["TEST_USER_PW"]
+            # sign up user
+            bash_command = f"aws cognito-idp sign-up --region {REGION} --client-id {CLIENT_ID} --username {TEST_USER} --password {TEST_USER_PW}"
+            os.system(bash_command)
+            # verify user
+            bash_command = f"aws cognito-idp admin-confirm-sign-up --region {REGION} --user-pool-id {USER_POOL_ID} --username {TEST_USER}"
+            os.system(bash_command)
     if args.action == 'destroy':
         bash_command = f'cd {path_to_infrastructure} && terraform destroy {noninteractive}'
         os.system(bash_command)
