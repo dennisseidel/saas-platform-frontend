@@ -34,6 +34,7 @@ aws-exports.js
 awsconfiguration.json
 
 videos
+screenshots
 
 config.json
 venv

@@ -20,8 +20,8 @@ describe('Open Landing Page', function() {
     cy.visit('/')
     cy.contains('Login').click().get('input[name=username]').type(process.env.TEST_USER).get('input[name=password').type(process.env.TEST_USER_PW)
     cy.contains('Sign In').click()
+    cy.contains('Skip').click()
     cy.url().should('include', '/management')
-
     cy.contains('Management Console')
     cy.contains('tenant')
     cy.contains('Services')
