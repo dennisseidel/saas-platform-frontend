@@ -29,7 +29,7 @@ steps:
     echo 'everything should be there'
   displayName: 'setup credentials & dependencies'
 - script: |
-    cd ./scripts && python deploy-infrastructure.py -c infrastructure -ni True
+    cd ./scripts && pip install -r requirements.txt && python deploy-infrastructure.py -c infrastructure -ni True
   env:
       AWS_ACCESS_KEY_ID: $(aws.accesskey)
       AWS_SECRET_ACCESS_KEY: $(aws.accesssecret)

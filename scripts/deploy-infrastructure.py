@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import os
 # import shutil
-# import boto3
+import boto3
 # import botocore
 import argparse
 import json
@@ -35,14 +35,21 @@ if args.component == "infrastructure":
             TEST_USER = os.environ["TEST_USER"]
             TEST_USER_PW = os.environ["TEST_USER_PW"]
             # sign up user
-            bash_command = f"aws cognito-idp sign-up --region {REGION} --client-id {CLIENT_ID} --username {TEST_USER} --password {TEST_USER_PW}"
-            os.system(bash_command)
+            client = boto3.client('cognito-idp')
+            response = client.sign_up(
+                ClientId=CLIENT_ID,
+                Username=TEST_USER,
+                Password=TEST_USER_PW
+            )
             # verify user
-            bash_command = f"aws cognito-idp admin-confirm-sign-up --region {REGION} --user-pool-id {USER_POOL_ID} --username {TEST_USER}"
-            os.system(bash_command)
+            response = client.admin_confirm_sign_up(
+                UserPoolId=USER_POOL_ID,
+                Username=TEST_USER
+            )
     if args.action == 'destroy':
         bash_command = f'cd {path_to_infrastructure} && terraform destroy {noninteractive}'
         os.system(bash_command)
+
 if args.component == "website":
     if args.action == "deploy":
         path_to_website = '../'
