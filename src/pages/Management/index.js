@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Layout, Row, Col } from 'antd';
 import { withAuthenticator } from 'aws-amplify-react';
-
+import CreateTenantForm from '@bit/denseidel.saas-platform.create-tenant-form';
 
 
 import { List, Avatar } from 'antd'; // or 'aws-amplify-react-native';
@@ -81,6 +81,7 @@ class Management extends Component {
       renderItem={item => (<List.Item><a href={item.link}>{item.title}</a></List.Item>)}
     />
         </div>
+        <CreateTenantForm/>
         </Col>
       </Row>
     </div>
