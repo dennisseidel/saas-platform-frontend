@@ -12,9 +12,12 @@ def user_missing(user_pool_id, username):
             UserPoolId=user_pool_id,
             Username=username
         )
-        return True
-    except:
+        print('user found')
         return False
+    except Exception as e:
+        print(e)
+        print('user missing')
+        return True
 
 
 parser = argparse.ArgumentParser()
@@ -33,22 +36,21 @@ if args.noninteractive:
 
 if args.component == "infrastructure":
     if args.action == 'deploy':
-        bash_command = f'cd {path_to_infrastructure} && terraform init && terraform apply {noninteractive}'
-        os.system(bash_command)
-        bash_command = f'cd {path_to_infrastructure} && terraform output --json > config.json'
-        os.system(bash_command)
+        #bash_command = f'cd {path_to_infrastructure} && terraform init && terraform apply {noninteractive}'
+        # os.system(bash_command)
+        #bash_command = f'cd {path_to_infrastructure} && terraform output --json > config.json'
+        # os.system(bash_command)
         # parse config
         with open(f"{path_to_infrastructure}/config.json", "r") as read_file:
             config = json.load(read_file)
             REGION = config['region']['value']
             CLIENT_ID = config['user_pool_web_client_id']['value']
             USER_POOL_ID = config['user_pool_id']['value']
-            TEST_USER = os.environ["TEST_USER"]
-            TEST_USER_PW = os.environ["TEST_USER_PW"]
+            TEST_USER = os.environ["CYPRESS_TEST_USER"]
+            TEST_USER_PW = os.environ["CYPRESS_TEST_USER_PW"]
             client = boto3.client('cognito-idp', region_name=REGION)
             if user_missing(USER_POOL_ID, TEST_USER):
                 # sign up user
-                print('TEST')
                 response = client.sign_up(
                     ClientId=CLIENT_ID,
                     Username=TEST_USER,
