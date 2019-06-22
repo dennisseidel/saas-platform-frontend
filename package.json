@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@bit/denseidel.saas-platform.create-tenant-form": "0.0.1",
+    "@bit/denseidel.saas-platform.create-tenant-form": "0.0.2",
     "antd": "^3.13.2",
     "aws-amplify": "^1.1.19",
     "aws-amplify-react": "^2.3.0",
