@@ -51,6 +51,7 @@ steps:
   displayName: 'run e2e tests'
 - script: |
     # setup preview environment & artifact bucket & upload to artifiact bucket
+    pip3 install awscli --upgrade
     cd ./scripts && ./deploy-infrastructure.py -c website
   env:
       AWS_ACCESS_KEY_ID: $(aws.accesskey)
