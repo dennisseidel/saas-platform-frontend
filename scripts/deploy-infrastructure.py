@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import os
-# import shutil
 import boto3
 import argparse
 import json
@@ -36,10 +35,10 @@ if args.noninteractive:
 
 if args.component == "infrastructure":
     if args.action == 'deploy':
-        #bash_command = f'cd {path_to_infrastructure} && terraform init && terraform apply {noninteractive}'
-        # os.system(bash_command)
-        #bash_command = f'cd {path_to_infrastructure} && terraform output --json > config.json'
-        # os.system(bash_command)
+        bash_command = f'cd {path_to_infrastructure} && terraform init && terraform apply {noninteractive}'
+        os.system(bash_command)
+        bash_command = f'cd {path_to_infrastructure} && terraform output --json > config.json'
+        os.system(bash_command)
         # parse config
         with open(f"{path_to_infrastructure}/config.json", "r") as read_file:
             config = json.load(read_file)
