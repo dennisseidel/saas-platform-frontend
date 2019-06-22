@@ -39,6 +39,7 @@ steps:
 - script: |
     cp ./infrastructure/config.json ./src/config.json
 - script: |
+    npm config set '@bit:registry' https://node.bit.dev
     npm install 
     npm run build
   displayName: 'install dependencies and build'
