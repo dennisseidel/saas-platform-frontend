@@ -39,7 +39,8 @@ steps:
 - script: |
     cp ./infrastructure/config.json ./src/config.json
 - script: |
-    npm install && npm run build
+    npm install 
+    npm run build
   displayName: 'install dependencies and build'
 - script: |
     npm run e2e
